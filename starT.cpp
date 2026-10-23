@@ -14,7 +14,23 @@ void runTests(void);
 string starT(int width, int height)
 {
   string result = "";
-  result = "stub"; // TODO: remove this line, replace with correct code
+  if ((width>2)&&(width%2==1)&&(height>1)) {
+    for (int i=0; i<height; i++){
+      if (i==0) 
+        //result+="*"*width;
+	for (int j=0; j<width; j++)
+	  result+="*";
+      else{
+        //result+=" "*(width/2)+"*"+" "*(width/2);
+	for (int j=0; j<width/2; j++)
+	  result+=" ";
+        result+="*";
+	for (int j=0; j<width/2; j++)
+	  result+=" "; 
+      }
+      result+="\n";	
+    }
+  }
   return result;
 }
 
@@ -76,18 +92,18 @@ void assertEquals(string expected, string actual, string message = "")
 
 int main(int argc, char *argv[])
 {
+  if (argc != 3){
+    cerr << "Usage: " << argv[0] << " width height" << endl;
+    exit(1);
+  }
 
-  // TODO: Add check for parameters
-  // and code to print usage message
-
-  // TODO: Add code to get width and height from command line args
-  // code that checks if they are both -1; if so, call runTests()
-  // then exit.
-
-  runTests();
-
-  // TODO: Add code that calls the starT function and prints
-  // the result on cout (without an extra newline)
-
+  int width = stoi(argv[1]);
+  int height = stoi(argv[2]);
+  if (width == -1 && height == -1){
+    runTests();
+    exit(0);
+  }
+  
+  cout << starT(width, height);
   return 0;
 }
